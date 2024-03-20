@@ -1,0 +1,5 @@
+{
+    "python.analysis.extraPaths": [
+        "./dlib-19.24.2/python_examples"
+    ]
+}

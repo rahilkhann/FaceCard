@@ -1,0 +1,219 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Python310/Lib/site-packages/cmake/data/share/cmake-3.28/Modules/CMakeDetermineSystem.cmake:233 (message)"
+      - "CMakeLists.txt:14 (project)"
+    message: |
+      The system is: Windows - 10.0.22621 - AMD64
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Python310/Lib/site-packages/cmake/data/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Python310/Lib/site-packages/cmake/data/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Python310/Lib/site-packages/cmake/data/share/cmake-3.28/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:14 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+      Compiler:  
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      1
+      MSBuild version 17.9.5+33de0b227 for .NET Framework
+      Build started 15-03-2024 10:33:44.
+      
+      Project "D:\\RAHIL KHAN\\HSBC\\FaceCard\\dlib-19.24.2\\build\\temp.win-amd64-cpython-310\\Release\\CMakeFiles\\3.28.3\\CompilerIdC\\CompilerIdC.vcxproj" on node 1 (default targets).
+      PrepareForBuild:
+        Creating directory "Debug\\".
+      C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Microsoft\\VC\\v170\\Microsoft.CppBuild.targets(513,5): warning MSB8003: The WindowsSDKDir property is not defined. Some build tools may not be found. [D:\\RAHIL KHAN\\HSBC\\FaceCard\\dlib-19.24.2\\build\\temp.win-amd64-cpython-310\\Release\\CMakeFiles\\3.28.3\\CompilerIdC\\CompilerIdC.vcxproj]
+        Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+        Creating directory "Debug\\CompilerIdC.tlog\\".
+      InitializeBuildStatus:
+        Creating "Debug\\CompilerIdC.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+        Touching "Debug\\CompilerIdC.tlog\\unsuccessfulbuild".
+      ClCompile:
+        C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\CL.exe /c /nologo /W0 /WX- /diagnostics:column /Od /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\\\" /Fd"Debug\\vc143.pdb" /external:W0 /Gd /TC /FC /errorReport:queue CMakeCCompilerId.c
+        CMakeCCompilerId.c
+      Link:
+        C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:".\\CompilerIdC.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\\CompilerIdC.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\\CompilerIdC.lib" /MACHINE:X64 Debug\\CMakeCCompilerId.obj
+      LINK : fatal error LNK1181: cannot open input file 'kernel32.lib' [D:\\RAHIL KHAN\\HSBC\\FaceCard\\dlib-19.24.2\\build\\temp.win-amd64-cpython-310\\Release\\CMakeFiles\\3.28.3\\CompilerIdC\\CompilerIdC.vcxproj]
+      Done Building Project "D:\\RAHIL KHAN\\HSBC\\FaceCard\\dlib-19.24.2\\build\\temp.win-amd64-cpython-310\\Release\\CMakeFiles\\3.28.3\\CompilerIdC\\CompilerIdC.vcxproj" (default targets) -- FAILED.
+      
+      Build FAILED.
+      
+      "D:\\RAHIL KHAN\\HSBC\\FaceCard\\dlib-19.24.2\\build\\temp.win-amd64-cpython-310\\Release\\CMakeFiles\\3.28.3\\CompilerIdC\\CompilerIdC.vcxproj" (default target) (1) ->
+      (PrepareForBuild target) -> 
+        C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Microsoft\\VC\\v170\\Microsoft.CppBuild.targets(513,5): warning MSB8003: The WindowsSDKDir property is not defined. Some build tools may not be found. [D:\\RAHIL KHAN\\HSBC\\FaceCard\\dlib-19.24.2\\build\\temp.win-amd64-cpython-310\\Release\\CMakeFiles\\3.28.3\\CompilerIdC\\CompilerIdC.vcxproj]
+      
+      
+      "D:\\RAHIL KHAN\\HSBC\\FaceCard\\dlib-19.24.2\\build\\temp.win-amd64-cpython-310\\Release\\CMakeFiles\\3.28.3\\CompilerIdC\\CompilerIdC.vcxproj" (default target) (1) ->
+      (Link target) -> 
+        LINK : fatal error LNK1181: cannot open input file 'kernel32.lib' [D:\\RAHIL KHAN\\HSBC\\FaceCard\\dlib-19.24.2\\build\\temp.win-amd64-cpython-310\\Release\\CMakeFiles\\3.28.3\\CompilerIdC\\CompilerIdC.vcxproj]
+      
+          1 Warning(s)
+          1 Error(s)
+      
+      Time Elapsed 00:00:01.62
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Python310/Lib/site-packages/cmake/data/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Python310/Lib/site-packages/cmake/data/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Python310/Lib/site-packages/cmake/data/share/cmake-3.28/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:14 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+      Compiler:  
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      1
+      MSBuild version 17.9.5+33de0b227 for .NET Framework
+      Build started 15-03-2024 10:33:46.
+      
+      Project "D:\\RAHIL KHAN\\HSBC\\FaceCard\\dlib-19.24.2\\build\\temp.win-amd64-cpython-310\\Release\\CMakeFiles\\3.28.3\\CompilerIdC\\CompilerIdC.vcxproj" on node 1 (default targets).
+      PrepareForBuild:
+        Creating directory "Debug\\".
+      C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Microsoft\\VC\\v170\\Microsoft.CppBuild.targets(513,5): warning MSB8003: The WindowsSDKDir property is not defined. Some build tools may not be found. [D:\\RAHIL KHAN\\HSBC\\FaceCard\\dlib-19.24.2\\build\\temp.win-amd64-cpython-310\\Release\\CMakeFiles\\3.28.3\\CompilerIdC\\CompilerIdC.vcxproj]
+        Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+        Creating directory "Debug\\CompilerIdC.tlog\\".
+      InitializeBuildStatus:
+        Creating "Debug\\CompilerIdC.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+        Touching "Debug\\CompilerIdC.tlog\\unsuccessfulbuild".
+      ClCompile:
+        C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\CL.exe /c /nologo /W0 /WX- /diagnostics:column /Od /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\\\" /Fd"Debug\\vc143.pdb" /external:W0 /Gd /TC /FC /errorReport:queue CMakeCCompilerId.c
+        CMakeCCompilerId.c
+      Link:
+        C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:".\\CompilerIdC.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\\CompilerIdC.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\\CompilerIdC.lib" /MACHINE:X64 Debug\\CMakeCCompilerId.obj
+      LINK : fatal error LNK1181: cannot open input file 'kernel32.lib' [D:\\RAHIL KHAN\\HSBC\\FaceCard\\dlib-19.24.2\\build\\temp.win-amd64-cpython-310\\Release\\CMakeFiles\\3.28.3\\CompilerIdC\\CompilerIdC.vcxproj]
+      Done Building Project "D:\\RAHIL KHAN\\HSBC\\FaceCard\\dlib-19.24.2\\build\\temp.win-amd64-cpython-310\\Release\\CMakeFiles\\3.28.3\\CompilerIdC\\CompilerIdC.vcxproj" (default targets) -- FAILED.
+      
+      Build FAILED.
+      
+      "D:\\RAHIL KHAN\\HSBC\\FaceCard\\dlib-19.24.2\\build\\temp.win-amd64-cpython-310\\Release\\CMakeFiles\\3.28.3\\CompilerIdC\\CompilerIdC.vcxproj" (default target) (1) ->
+      (PrepareForBuild target) -> 
+        C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Microsoft\\VC\\v170\\Microsoft.CppBuild.targets(513,5): warning MSB8003: The WindowsSDKDir property is not defined. Some build tools may not be found. [D:\\RAHIL KHAN\\HSBC\\FaceCard\\dlib-19.24.2\\build\\temp.win-amd64-cpython-310\\Release\\CMakeFiles\\3.28.3\\CompilerIdC\\CompilerIdC.vcxproj]
+      
+      
+      "D:\\RAHIL KHAN\\HSBC\\FaceCard\\dlib-19.24.2\\build\\temp.win-amd64-cpython-310\\Release\\CMakeFiles\\3.28.3\\CompilerIdC\\CompilerIdC.vcxproj" (default target) (1) ->
+      (Link target) -> 
+        LINK : fatal error LNK1181: cannot open input file 'kernel32.lib' [D:\\RAHIL KHAN\\HSBC\\FaceCard\\dlib-19.24.2\\build\\temp.win-amd64-cpython-310\\Release\\CMakeFiles\\3.28.3\\CompilerIdC\\CompilerIdC.vcxproj]
+      
+          1 Warning(s)
+          1 Error(s)
+      
+      Time Elapsed 00:00:01.50
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Python310/Lib/site-packages/cmake/data/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Python310/Lib/site-packages/cmake/data/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Python310/Lib/site-packages/cmake/data/share/cmake-3.28/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:14 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+      Compiler:  
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      1
+      MSBuild version 17.9.5+33de0b227 for .NET Framework
+      Build started 15-03-2024 10:33:48.
+      
+      Project "D:\\RAHIL KHAN\\HSBC\\FaceCard\\dlib-19.24.2\\build\\temp.win-amd64-cpython-310\\Release\\CMakeFiles\\3.28.3\\CompilerIdCXX\\CompilerIdCXX.vcxproj" on node 1 (default targets).
+      PrepareForBuild:
+        Creating directory "Debug\\".
+      C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Microsoft\\VC\\v170\\Microsoft.CppBuild.targets(513,5): warning MSB8003: The WindowsSDKDir property is not defined. Some build tools may not be found. [D:\\RAHIL KHAN\\HSBC\\FaceCard\\dlib-19.24.2\\build\\temp.win-amd64-cpython-310\\Release\\CMakeFiles\\3.28.3\\CompilerIdCXX\\CompilerIdCXX.vcxproj]
+        Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+        Creating directory "Debug\\CompilerIdCXX.tlog\\".
+      InitializeBuildStatus:
+        Creating "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+        Touching "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild".
+      ClCompile:
+        C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\CL.exe /c /nologo /W0 /WX- /diagnostics:column /Od /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\\\" /Fd"Debug\\vc143.pdb" /external:W0 /Gd /TP /FC /errorReport:queue CMakeCXXCompilerId.cpp
+        CMakeCXXCompilerId.cpp
+      Link:
+        C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:".\\CompilerIdCXX.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\\CompilerIdCXX.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\\CompilerIdCXX.lib" /MACHINE:X64 Debug\\CMakeCXXCompilerId.obj
+      LINK : fatal error LNK1181: cannot open input file 'kernel32.lib' [D:\\RAHIL KHAN\\HSBC\\FaceCard\\dlib-19.24.2\\build\\temp.win-amd64-cpython-310\\Release\\CMakeFiles\\3.28.3\\CompilerIdCXX\\CompilerIdCXX.vcxproj]
+      Done Building Project "D:\\RAHIL KHAN\\HSBC\\FaceCard\\dlib-19.24.2\\build\\temp.win-amd64-cpython-310\\Release\\CMakeFiles\\3.28.3\\CompilerIdCXX\\CompilerIdCXX.vcxproj" (default targets) -- FAILED.
+      
+      Build FAILED.
+      
+      "D:\\RAHIL KHAN\\HSBC\\FaceCard\\dlib-19.24.2\\build\\temp.win-amd64-cpython-310\\Release\\CMakeFiles\\3.28.3\\CompilerIdCXX\\CompilerIdCXX.vcxproj" (default target) (1) ->
+      (PrepareForBuild target) -> 
+        C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Microsoft\\VC\\v170\\Microsoft.CppBuild.targets(513,5): warning MSB8003: The WindowsSDKDir property is not defined. Some build tools may not be found. [D:\\RAHIL KHAN\\HSBC\\FaceCard\\dlib-19.24.2\\build\\temp.win-amd64-cpython-310\\Release\\CMakeFiles\\3.28.3\\CompilerIdCXX\\CompilerIdCXX.vcxproj]
+      
+      
+      "D:\\RAHIL KHAN\\HSBC\\FaceCard\\dlib-19.24.2\\build\\temp.win-amd64-cpython-310\\Release\\CMakeFiles\\3.28.3\\CompilerIdCXX\\CompilerIdCXX.vcxproj" (default target) (1) ->
+      (Link target) -> 
+        LINK : fatal error LNK1181: cannot open input file 'kernel32.lib' [D:\\RAHIL KHAN\\HSBC\\FaceCard\\dlib-19.24.2\\build\\temp.win-amd64-cpython-310\\Release\\CMakeFiles\\3.28.3\\CompilerIdCXX\\CompilerIdCXX.vcxproj]
+      
+          1 Warning(s)
+          1 Error(s)
+      
+      Time Elapsed 00:00:01.58
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Python310/Lib/site-packages/cmake/data/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Python310/Lib/site-packages/cmake/data/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Python310/Lib/site-packages/cmake/data/share/cmake-3.28/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:14 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+      Compiler:  
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      1
+      MSBuild version 17.9.5+33de0b227 for .NET Framework
+      Build started 15-03-2024 10:33:50.
+      
+      Project "D:\\RAHIL KHAN\\HSBC\\FaceCard\\dlib-19.24.2\\build\\temp.win-amd64-cpython-310\\Release\\CMakeFiles\\3.28.3\\CompilerIdCXX\\CompilerIdCXX.vcxproj" on node 1 (default targets).
+      PrepareForBuild:
+        Creating directory "Debug\\".
+      C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Microsoft\\VC\\v170\\Microsoft.CppBuild.targets(513,5): warning MSB8003: The WindowsSDKDir property is not defined. Some build tools may not be found. [D:\\RAHIL KHAN\\HSBC\\FaceCard\\dlib-19.24.2\\build\\temp.win-amd64-cpython-310\\Release\\CMakeFiles\\3.28.3\\CompilerIdCXX\\CompilerIdCXX.vcxproj]
+        Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+        Creating directory "Debug\\CompilerIdCXX.tlog\\".
+      InitializeBuildStatus:
+        Creating "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+        Touching "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild".
+      ClCompile:
+        C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\CL.exe /c /nologo /W0 /WX- /diagnostics:column /Od /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\\\" /Fd"Debug\\vc143.pdb" /external:W0 /Gd /TP /FC /errorReport:queue CMakeCXXCompilerId.cpp
+        CMakeCXXCompilerId.cpp
+      Link:
+        C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:".\\CompilerIdCXX.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\\CompilerIdCXX.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\\CompilerIdCXX.lib" /MACHINE:X64 Debug\\CMakeCXXCompilerId.obj
+      LINK : fatal error LNK1181: cannot open input file 'kernel32.lib' [D:\\RAHIL KHAN\\HSBC\\FaceCard\\dlib-19.24.2\\build\\temp.win-amd64-cpython-310\\Release\\CMakeFiles\\3.28.3\\CompilerIdCXX\\CompilerIdCXX.vcxproj]
+      Done Building Project "D:\\RAHIL KHAN\\HSBC\\FaceCard\\dlib-19.24.2\\build\\temp.win-amd64-cpython-310\\Release\\CMakeFiles\\3.28.3\\CompilerIdCXX\\CompilerIdCXX.vcxproj" (default targets) -- FAILED.
+      
+      Build FAILED.
+      
+      "D:\\RAHIL KHAN\\HSBC\\FaceCard\\dlib-19.24.2\\build\\temp.win-amd64-cpython-310\\Release\\CMakeFiles\\3.28.3\\CompilerIdCXX\\CompilerIdCXX.vcxproj" (default target) (1) ->
+      (PrepareForBuild target) -> 
+        C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Microsoft\\VC\\v170\\Microsoft.CppBuild.targets(513,5): warning MSB8003: The WindowsSDKDir property is not defined. Some build tools may not be found. [D:\\RAHIL KHAN\\HSBC\\FaceCard\\dlib-19.24.2\\build\\temp.win-amd64-cpython-310\\Release\\CMakeFiles\\3.28.3\\CompilerIdCXX\\CompilerIdCXX.vcxproj]
+      
+      
+      "D:\\RAHIL KHAN\\HSBC\\FaceCard\\dlib-19.24.2\\build\\temp.win-amd64-cpython-310\\Release\\CMakeFiles\\3.28.3\\CompilerIdCXX\\CompilerIdCXX.vcxproj" (default target) (1) ->
+      (Link target) -> 
+        LINK : fatal error LNK1181: cannot open input file 'kernel32.lib' [D:\\RAHIL KHAN\\HSBC\\FaceCard\\dlib-19.24.2\\build\\temp.win-amd64-cpython-310\\Release\\CMakeFiles\\3.28.3\\CompilerIdCXX\\CompilerIdCXX.vcxproj]
+      
+          1 Warning(s)
+          1 Error(s)
+      
+      Time Elapsed 00:00:01.69
+      
+      
+...
