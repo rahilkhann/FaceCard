@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment Mode</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #ffffff;
+    }
+    .header {
+        display: block    ;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px; 
+    }
+
+    .container {
+        text-align: center;
+        border: 3px solid #ccc; /* Border properties */
+        border-radius: 20px; /* Rounded border */
+        padding: 30px; /* Padding inside the border */
+        position: relative; /* Necessary for absolute positioning of the image */
+        font-size: 15px;
+        width:350px;
+    }
+
+    .payment-options {
+        margin-bottom: 20px;
+    }
+
+    .payment-options label {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .payment-options input[type="radio"] {
+        display: none;
+    }
+
+    .payment-options label.btn {
+        padding: 10px 20px;
+        background-color:  #9b1d14;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .payment-options label.btn:hover {
+        background-color: #80120a;
+    }
+
+    .payment-options input[type="radio"]:checked + label.btn {
+        background-color: #0056b3;
+    }
+    #topRightImage {
+        position: absolute;
+        top: 10px; /* Adjust as needed */
+        right: 10px; /* Adjust as needed */
+        width: 250px; /* Adjust width as needed */
+        height: auto; /* Maintain aspect ratio */
+    }
+    .logo {
+        width: 70px; /* Adjust size as needed */
+        margin-right: 10px; /* Adjust spacing between logo and heading */
+    }
+</style>
+</head>
+<body>
+<img src="/static/icon.png" alt="Image" id="topRightImage">
+<div class="container">
+    <div class="header">
+        <img src="/static/Hsbc_icon.png" alt="HSBC Logo" class="logo">
+        <h1 class="heading">HSBC Payment Mode</h1>
+    </div> 
+    <form class="payment-options">
+        <input type="radio" id="creditDebit" name="paymentMethod" value="creditDebit">
+        <label class="btn" for="creditDebit">Pay through Credit/Debit Card</label><br>
+        
+        <input type="radio" id="upi" name="paymentMethod" value="upi">
+        <label class="btn" for="upi">Pay through UPI</label><br>
+        
+        <input type="radio" id="facePay" name="paymentMethod" value="facePay">
+        <label class="btn" for="facePay" onclick="captureFace()">FacePay</label><br> <!-- Added onclick event to trigger captureFace() function -->
+        
+        <input type="radio" id="others" name="paymentMethod" value="others">
+        <label class="btn" for="others">Others</label>
+    </form>
+</div>
+
+<script>
+    function captureFace() {
+        fetch('/capture_face', { method: 'POST' })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Face captured successfully.');
+                    // Call otp_secure endpoint
+                    window.location.href = '/otp';
+                    console.log("heloo iam captured")
+                    // fetch('/_secure', { method: 'POST' })
+                    //     .then(response => {
+                    //         if (response.ok) {
+                    //             console.log('OTP secured successfully.');
+                    //             // Redirect to otp.html page
+                                
+                    //         } else {
+                    //             console.error('Error securing OTP.');
+                    //             // Handle error response if needed
+                    //         }
+                    //     })
+                        // .catch(error => {
+                        //     console.error('Error securing OTP:', error);
+                        //     // Handle fetch error if needed
+                        // });
+                } else {
+                    console.error('Error capturing face.');
+                    // Handle error response if needed
+                }
+            })
+            .catch(error => {
+                console.error('Error capturing face:', error);
+                // Handle fetch error if needed
+            });
+    }
+</script>
+
+</body>
+</html>

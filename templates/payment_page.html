@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <img src="/static/icon.png" alt="Image" id="topRightImage">
+    <div class="container">
+        <div class="header">
+            <img src="/static/Hsbc_icon.png" alt="HSBC Logo" class="logo">
+            <h1 class="heading">HSBC Payment Gateway</h1>
+        </div>
+    
+        <form id="paymentForm" method="post">
+            <label for="amount" style="font-size: 20px;">Enter Amount to Pay:</label><br>
+            <input type="number" id="amount" name="amount" placeholder="Enter amount" required><br><br> <!-- Increased width -->
+            <button type="submit" id="payButton">Pay</button>
+        </form>
+</div>
+
+<script>
+    document.getElementById("paymentForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent default form submission
+            var form = this;
+            var formData = new FormData(form); // Create FormData object from form data
+            fetch("/process-payment", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    // If payment processed successfully, redirect to payment options page
+                    window.location.href = "/payment-options";
+                } else {
+                    console.error("Payment processing failed.");
+                }
+            })
+            .catch(error => {
+                console.error("Error processing payment:", error);
+            });
+        });
+</script>
+</body>
+</html>

