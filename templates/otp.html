@@ -9,28 +9,35 @@
         font-family: Arial, sans-serif;
         margin: 0;
         padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
         height: 100vh;
-        background-color: #ffffff;
+        background: url('/static/bg.jpg') no-repeat center center fixed;
+        background-size: cover;
+        overflow: hidden;
     }
-    #topRightImage {
-        position: absolute;
-        top: 10px; /* Adjust as needed */
-        right: 10px; /* Adjust as needed */
-        width: 250px; /* Adjust width as needed */
-        height: auto; /* Maintain aspect ratio */
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Adjust the alpha channel for desired opacity */
+        backdrop-filter: blur(2px); /* Adjust the blur radius */
+        z-index: 0;
     }
 
     .container {
         text-align: center;
-        border: 3px solid #e7bbbb; /* Border properties */
+        background-color: #fefefe;
+        /* border: 3px solid #e7dbbb; */
+        border: 3px solid #4a1f69; /* Border properties */
         border-radius: 20px; /* Rounded border */
         padding: 30px; /* Padding inside the border */
         position: relative; /* Necessary for absolute positioning of the image */
         font-size: 15px;
         width:350px;
+        left:37%;
+        top:20%
     }
 
     .otp-form {
@@ -59,41 +66,61 @@
         background-color: #ccc;
         cursor: not-allowed;
     }
+    .otp-form button:hover {
+        background-color: #43337d;
+    }
     .logo {
         width: 70px; /* Adjust size as needed */
-        margin-right: 10px; /* Adjust spacing between logo and heading */
+        position: absolute;
+        top: 10pt;
+        left: 0.8pc;
+        padding-right: 10pt;
     }
-    .overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
+    .logo_1 {
+        width: 120px; /* Adjust size as needed */
+        position: absolute;
+        top: 10;
+        right: 0;
+        padding-right: 10pt; 
+   }  
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    form {
         width: 100%;
-        height: 100%;
-        background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
-        z-index: 999; /* Ensure the overlay is above other content */
-        display: none; /* Initially hidden */
-    }
-    #message {
-        color: green;
-        font-weight: bold;
+        max-width: 400px; /* Adjust as needed */
+        padding: 20px;
     }
 </style>
 </head>
 <body>
+<div class="overlay"></div>
 <div class="container">
-    <div class="header">
-        <img src="/static/Hsbc_icon.png" alt="HSBC Logo" class="logo">
+    <!-- <div class="header">
+        <img src="Hsbc_icon.png" alt="HSBC Logo" class="logo">
         <h2 style="color: red;">One-Time Password</h2>
         <p>The One Time Password for the current transaction is sent to your registered mobile number ending with xxxxxxx874</p>
+    </div> -->
+    <div class="header">
+        <img src="/static/Hsbc_icon.png" alt="HSBC Logo" class="logo">
+        <img src="icon_1.png" alt="Facepay Logo" class="logo_1">
+        <!-- <h2 style="color: rgb(74, 39, 98);margin-top:50px;font-size: 2vw;">One-Time Password</h2>
+        <p>The One Time Password for the current transaction is sent to your registered mobile number ending with xxxxxxx874 </p> -->
     </div>
+    
     <form class="otp-form" id="otpForm">
+        <h2 style="color: rgb(74, 39, 98);margin-top:50px;font-size: 2vw;">One-Time Password</h2>
+        <p>The One Time Password for the current transaction is sent to your registered mobile number ending with xxxxxxx874 </p>
         <input type="text" id="otp" name="otp" placeholder="Enter OTP" required><br><br>
         <button type="submit" id="submitBtn">Submit</button><br><br>
         <button type="button" id="resendBtn" disabled>Resend OTP</button><br><br>
         <div id="timer">Time remaining: 2:00</div>
         <div id="message"></div> <!-- Container for displaying messages -->
     </form>
-    <div class="overlay" id="overlay"></div>
 </div>
 
 <script>
@@ -128,11 +155,12 @@ document.getElementById('otpForm').addEventListener('submit', function(event) {
          
             showMessage(data.message);
             // alert(data.message); // Display a message to the user
-                if (data.message === 'OTP processed successfully') {
-                startTimer();
-                document.getElementById('overlay').style.display = 'block';
-            
-            }
+            if (data.message === 'OTP processed successfully') {
+            startTimer();
+            setTimeout(() => {
+                window.location.href = '/final'; // Redirect after 2 minutes
+            }, 1200); // 2 minutes in milliseconds
+        }
         })
         .catch(error => {
             console.error('Error sending OTP:', error);

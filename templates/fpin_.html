@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment Mode</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #ffffff;
+    }
+    .header {
+        display: block;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px; 
+    }
+
+    .container {
+        text-align: center;
+        border: 3px solid #ccc;
+        border-radius: 20px;
+        padding: 30px;
+        position: relative;
+        font-size: 15px;
+        width:350px;
+    }
+
+    .payment-options {
+        margin-bottom: 20px;
+    }
+
+    .payment-options label {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .payment-options input[type="radio"] {
+        display: none;
+    }
+
+    .payment-options label.btn {
+        padding: 10px 20px;
+        background-color:  #9b1d14;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .payment-options label.btn:hover {
+        background-color: #80120a;
+    }
+
+    .payment-options input[type="radio"]:checked + label.btn {
+        background-color: #0056b3;
+    }
+
+    #topRightImage {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 250px;
+        height: auto;
+    }
+
+    .logo {
+        width: 70px;
+        margin-right: 10px;
+    }
+
+    /* Modal */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.4);
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 60%;
+        max-width: 400px; /* Max width of the modal */
+        position: relative;
+    }
+
+    .close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .close:hover {
+        color: #f00;
+    }
+
+    .modal-content button {
+        margin: 5px;
+        padding: 10px 20px;
+        background-color: #9b1d14;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .modal-content button:hover {
+        background-color: #3a3073;
+    }
+</style>
+</head>
+<body>
+<img src="/static/icon.png" alt="Image" id="topRightImage">
+<div class="container">
+    <div class="header">
+        <img src="/static/Hsbc_icon.png" alt="HSBC Logo" class="logo">
+        <h1 class="heading">HSBC Payment Mode</h1>
+    </div> 
+    <form class="payment-options">
+        <input type="radio" id="creditDebit" name="paymentMethod" value="creditDebit">
+        <label class="btn" for="creditDebit">Pay through Credit/Debit Card</label><br>
+        
+        <input type="radio" id="upi" name="paymentMethod" value="upi">
+        <label class="btn" for="upi">Pay through UPI</label><br>
+        
+        <input type="radio" id="facePay" name="paymentMethod" value="facePay">
+        <label class="btn" for="facePay" onclick="openModal()">FacePay</label><br>
+        
+        <input type="radio" id="others" name="paymentMethod" value="others">
+        <label class="btn" for="others">Others</label>
+    </form>
+</div>
+
+<!-- Modal -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <p>How would you like to proceed with the payment?</p>
+        <button onclick="fpinClicked()">FPIN</button>
+        <button onclick="otpClicked()">OTP</button>       
+    </div>
+</div>
+
+<script>
+
+function captureFace() {
+        fetch('/capture_face', { method: 'POST' })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Face captured successfully.');
+                    // Call otp_secure endpoint
+                    window.location.href = '/otp';
+                    console.log("heloo iam captured")
+                    // fetch('/_secure', { method: 'POST' })
+                    //     .then(response => {
+                    //         if (response.ok) {
+                    //             console.log('OTP secured successfully.');
+                    //             // Redirect to otp.html page
+                                
+                    //         } else {
+                    //             console.error('Error securing OTP.');
+                    //             // Handle error response if needed
+                    //         }
+                    //     })
+                        // .catch(error => {
+                        //     console.error('Error securing OTP:', error);
+                        //     // Handle fetch error if needed
+                        // });
+                } else {
+                    console.error('Error capturing face.');
+                    // Handle error response if needed
+                }
+            })
+            .catch(error => {
+                console.error('Error capturing face:', error);
+                // Handle fetch error if needed
+            });
+    }
+    // Function to open the modal
+
+    function captureFPIN() {
+        fetch('/capture_face_fpin', { method: 'POST' })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Face captured successfully.');
+                    // Call otp_secure endpoint
+                    window.location.href = '/Facepin';
+                    console.log("heloo iam captured")
+                    // fetch('/_secure', { method: 'POST' })
+                    //     .then(response => {
+                    //         if (response.ok) {
+                    //             console.log('OTP secured successfully.');
+                    //             // Redirect to otp.html page
+                                
+                    //         } else {
+                    //             console.error('Error securing OTP.');
+                    //             // Handle error response if needed
+                    //         }
+                    //     })
+                        // .catch(error => {
+                        //     console.error('Error securing OTP:', error);
+                        //     // Handle fetch error if needed
+                        // });
+                } else {
+                    console.error('Error capturing face.');
+                    // Handle error response if needed
+                }
+            })
+            .catch(error => {
+                console.error('Error capturing face:', error);
+                // Handle fetch error if needed
+            });
+    }
+    function openModal() {
+        var modal = document.getElementById("myModal");
+        modal.style.display = "block";
+    }
+
+    // Function to close the modal
+    function closeModal() {
+        var modal = document.getElementById("myModal");
+        modal.style.display = "none";
+    }
+
+    // Function to handle FPIN button click
+    function fpinClicked() {
+        alert("FPIN clicked");
+        captureFPIN();
+        closeModal();
+        // Add your FPIN logic here
+        window.location.href = '/Facepin';
+    }
+
+    // Function to handle OTP button click
+    function otpClicked() {
+        alert("OTP clicked");
+        captureFace();
+        closeModal();
+        // Add your OTP logic here
+        window.location.href = '/otp';
+    }
+</script>
+
+</body>
+</html>

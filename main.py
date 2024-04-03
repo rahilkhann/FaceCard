@@ -42,9 +42,9 @@ info = {}
 
 
 #public function 
-account_sid = "AC8424c4cb0effea41160fd681f696b814"
-auth_token = "4eb094945a92f61dd78b9f984848089e"
-verify_sid = "VAaeba53c152025def044ab6da1048e545"
+account_sid = 'ACa4ee53105ae55a3cae3ed9777da42919'
+auth_token = '928645a2401a7b4f5337262e0c6bc458'
+verify_sid = "VAe8164f5cbc068f87c8c363eeee3c83b9"
 client = Client(account_sid, auth_token)
 
 def send_otp(phone_number):
@@ -94,6 +94,14 @@ async def get_payment_page(request: Request):
 @app.get("/final", response_class=HTMLResponse)
 async def get_payment_page(request: Request):
     return templates.TemplateResponse("fi.html", {"request": request})
+
+@app.get("/fpin_", response_class=HTMLResponse)
+async def get_payment_page(request: Request):
+    return templates.TemplateResponse("fpin_.html", {"request": request})
+
+@app.get("/Facepin", response_class=HTMLResponse)
+async def get_payment_page(request: Request):
+    return templates.TemplateResponse("Facepin.html", {"request": request})
 
 @app.post("/capture_face")
 async def capture_face():
@@ -168,7 +176,7 @@ async def capture_face():
             if name != "Unknown":
                 if phone_number:
                     # Display bounding box and label for 4 seconds
-                    cv2.imshow("Frame", frame)
+                    cv2.imshow("FacePay", frame)
                     cv2.waitKey(1)  # Wait for a key press to avoid immediate close
                     time.sleep(4)  # Delay for 4 seconds
 
@@ -211,6 +219,114 @@ async def capture_face():
     cv2.destroyAllWindows()
 
     return {"message": "Face captured successfully"}
+
+
+
+
+#=======================================================Fpin code=========================
+@app.post("/capture_face_fpin")
+async def capture_face():
+    print("I am capture face")
+    
+    #--------------------------------------------------------------------------
+    # Load customer data from Excel
+    customer_data = pd.read_excel("customer_data.xlsx")
+    customer_data['Cust_ID'] = customer_data['Cust_ID'].astype(str)
+    print(customer_data.dtypes)
+
+
+    def get_phone_number(cust_id):
+        row = customer_data[customer_data['Cust_ID'] == cust_id]
+        if not row.empty:
+            return str(row.iloc[0]['Phone'])
+        else:
+            return None
+
+
+    # Face recognition setup
+    sfr = SimpleFacerec()
+    sfr.load_encoding_images("images/")
+
+    # Twilio credentials (replace with your own)
+    # ... (replace placeholders with your actual credentials)
+
+    # Initialize Twilio client (commented out for security)
+    # client = Client(account_sid, auth_token)
+
+    cap = cv2.VideoCapture(0)
+
+    while True:
+        ret, frame = cap.read()
+
+        # Detect faces
+        face_locations, face_names = sfr.detect_known_faces(frame)
+
+        for face_loc, name in zip(face_locations, face_names):
+            y1, x2, y2, x1 = face_loc[0], face_loc[1], face_loc[2], face_loc[3]
+
+            # Get current timestamp
+            now = datetime.now()
+            timestamp = now.strftime("%Y-%m-%d %H:%M:%S")
+
+            # Get current location (using geocoder library)
+            g = geocoder.ip('me')  # Get location based on IP address
+            latitude = str(g.lat)
+            longitude = str(g.lng)
+            current_location = f"Lat: {latitude}, Long: {longitude}"
+
+            # Combine location and timestamp for display
+            location_and_timestamp = f"{current_location} - {timestamp}"
+
+            # Display text with name, location, and timestamp
+            cv2.putText(frame, name, (x1, y1 - 10), cv2.FONT_HERSHEY_DUPLEX, 1, (0, 0, 200), 2)
+            cv2.putText(frame, location_and_timestamp, (x1, y2 + 15), cv2.FONT_HERSHEY_DUPLEX, 0.5, (0, 0, 255), 1)
+            cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 0, 200), 4)
+
+        # Check for recognized face and handle accordingly
+        if face_names:
+            # Recognized face found - handle OTP and close camera
+            name = face_names[0]  # Assuming only one face is recognized at a time
+            print(f"Recognized face: {name}")
+
+            phone_number = str(get_phone_number(name))
+            phone_number = "+91" + phone_number
+            print(phone_number)
+            info["Phone"] = phone_number
+
+            # Send OTP if face is recognized and phone number is found
+            if name != "Unknown":
+                if phone_number:
+                    # Display bounding box and label for 4 seconds
+                    cv2.imshow("FacePay", frame)
+                    cv2.waitKey(1)  # Wait for a key press to avoid immediate close
+                    time.sleep(4)  # Delay for 4 seconds
+
+                    # ... (OTP process using Twilio - commented out)
+                    cap.release()  # Close camera
+                    cv2.destroyAllWindows()
+
+                    # result = fetch_FPIN
+                    # result = send_otp(phone_number)
+                    
+                    
+                    cap.release()  # Close camera
+                    cv2.destroyAllWindows()
+                    break  # Exit the loop after OTP verification
+
+        # No recognized face or unknown face - keep camera open
+        cv2.imshow("Frame", frame)
+
+        key = cv2.waitKey(1)
+        if key == 27:  # Exit on Esc
+            break
+
+    cap.release()
+    cv2.destroyAllWindows()
+
+    return {"message": "Face captured successfully"}
+
+
+#-------------------------Fpin code ends ---------------------------------------------------
 
 
 @app.post("/_secure")
