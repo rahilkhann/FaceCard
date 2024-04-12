@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .payment-logos {
+            top:10vh;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20vh;
+            margin-left :40vh;
+            max-width: 130vh;
+            border-radius: 3px;
+            /* border: 1px solid #888; */
+        }
+        .logo {
+            width: 100px; /* Set the width */
+            height: 100px; /* Set the height */
+            background-size: contain; /* Ensure background image fits within the specified dimensions */
+            background-repeat: no-repeat; /* Prevent the background image from repeating */
+            background-position: center; /* Center the background image */
+            cursor: pointer;
+            margin-right: 30px;
+            border : 2px solid;
+            border-radius: 10px;
+        }
+        .logo:hover{
+            background-color: #928cc2;
+        }
+        /* Add logos with their respective colors and designs */
+        .paypal {
+            background-image: url("/static/upi.png") ;
+            /* border : 2px solid; */
+            width:200px;
+            /* size: 40vh; */  
+        }
+        
+
+        .payoneer {
+            background-image: url("/static/visa.png");
+            width:200px;
+        }
+
+        .skrill {
+            background-image: url("/static/gpay.png");
+            width:200px;
+        }
+        .fpay{
+            background-image: url("/static/icon.png");
+            width: 200px;
+            /* border: 2px solid ; */
+            padding:-30px;
+        }
+
+        .g-pay {
+            background-image: url("/static/paypal.png");
+            width:200px;
+        }
+
+        .stripe {
+            background-image: url("/static/amazon.png");
+            width:200px;
+        }
+        .mobiquick {
+            background-image: url("/static/mobiquick.png");
+            width:200px;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 60%;
+        max-width: 400px; /* Max width of the modal */
+        position: relative;
+    }
+
+    .close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .close:hover {
+        color: #f00;
+    }
+
+    .modal-content button {
+        margin: 5px;
+        padding: 10px 20px;
+        background-color: #9b1d14;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .modal-content button:hover {
+        background-color: #3a3073;
+    }
+    </style>
+    <title>Payment Logos</title>
+</head>
+<body>
+    <div class="payment-logos">
+        <div class="logo paypal" onclick="alert('PayPal button clicked!')"></div>
+        <div class="logo payoneer" onclick="alert('Payoneer button clicked!')"></div>
+        <div class="logo skrill" onclick="alert('Skrill button clicked!')"></div>
+        <div class="logo g-pay" onclick="alert('Google Pay button clicked!')"></div>
+        <div class="logo fpay" onclick="openModal()"></div>
+        <div class="logo mobiquick" onclick="alert('pay button clicked!')"></div>
+        <div class="logo stripe" onclick="alert('Skrill button clicked!')"></div>
+    </div>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p>How would you like to authenticate your payment?</p>
+            <button onclick="fpinClicked()">FPIN</button>
+            <button onclick="otpClicked()">OTP</button>       
+        </div>
+    </div>
+
+    <script>
+
+        function captureFace() {
+                fetch('/capture_face', { method: 'POST' })
+                    .then(response => {
+                        if (response.ok) {
+                            console.log('Face captured successfully.');
+                            // Call otp_secure endpoint
+                            window.location.href = '/otp';
+                            console.log("heloo iam captured")
+                            // fetch('/_secure', { method: 'POST' })
+                            //     .then(response => {
+                            //         if (response.ok) {
+                            //             console.log('OTP secured successfully.');
+                            //             // Redirect to otp.html page
+                                        
+                            //         } else {
+                            //             console.error('Error securing OTP.');
+                            //             // Handle error response if needed
+                            //         }
+                            //     })
+                                // .catch(error => {
+                                //     console.error('Error securing OTP:', error);
+                                //     // Handle fetch error if needed
+                                // });
+                        } else {
+                            console.error('Error capturing face.');
+                            // Handle error response if needed
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error capturing face:', error);
+                        // Handle fetch error if needed
+                    });
+            }
+            // Function to open the modal
+        
+            function captureFPIN() {
+                fetch('/capture_face_fpin', { method: 'POST' })
+                    .then(response => {
+                        if (response.ok) {
+                            console.log('Face captured successfully.');
+                            // Call otp_secure endpoint
+                            window.location.href = '/Facepin';
+                            console.log("heloo iam captured")
+                            // fetch('/_secure', { method: 'POST' })
+                            //     .then(response => {
+                            //         if (response.ok) {
+                            //             console.log('OTP secured successfully.');
+                            //             // Redirect to otp.html page
+                                        
+                            //         } else {
+                            //             console.error('Error securing OTP.');
+                            //             // Handle error response if needed
+                            //         }
+                            //     })
+                                // .catch(error => {
+                                //     console.error('Error securing OTP:', error);
+                                //     // Handle fetch error if needed
+                                // });
+                        } else {
+                            console.error('Error capturing face.');
+                            // Handle error response if needed
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error capturing face:', error);
+                        // Handle fetch error if needed
+                    });
+            }
+            function openModal() {
+                var modal = document.getElementById("myModal");
+                modal.style.display = "block";
+            }
+        
+            // Function to close the modal
+            function closeModal() {
+                var modal = document.getElementById("myModal");
+                modal.style.display = "none";
+            }
+        
+            // Function to handle FPIN button click
+            function fpinClicked() {
+                alert("FPIN clicked");
+                captureFPIN();
+                closeModal();
+                // Add your FPIN logic here
+                window.location.href = '/Facepin';
+            }
+        
+            // Function to handle OTP button click
+            function otpClicked() {
+                alert("OTP clicked");
+                captureFace();
+                closeModal();
+                // Add your OTP logic here
+                window.location.href = '/otp';
+            }
+        </script>
+</body>
+
+</html>

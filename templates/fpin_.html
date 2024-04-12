@@ -5,7 +5,51 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Payment Mode</title>
 <style>
-    body {
+    .payment-logos {
+            top:10vh;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 40vh;
+            margin-left :30vh;
+            max-width: 130vh;
+            border-radius: 3px;
+            border: 1px solid #888;
+            height:50vh;
+        }
+
+        .logo {
+            width: 200px;
+            height: 100px;
+            background-size: cover;
+            background-position: center;
+            cursor: pointer;
+            margin-right: 100px;
+            gap: 100vh;
+        }
+
+        /* Add logos with their respective colors and designs */
+        .paypal {
+            background-image: url("/static/visa.png") ;
+        }
+
+        .payoneer {
+            background-image: url("/static/icon.png");
+        }
+
+        .skrill {
+            background-image: url("/static/icon.png");
+        }
+
+        .g-pay {
+            background-image: url("/static/icon.png");
+        }
+
+        .stripe {
+            background-image: url("/static/icon.png");
+        }
+    /* body {
         font-family: Arial, sans-serif;
         margin: 0;
         padding: 0;
@@ -14,22 +58,46 @@
         align-items: center;
         height: 100vh;
         background-color: #ffffff;
+    } */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        background: url('/static/bg.jpg') no-repeat center center fixed;
+        background-size: cover;
+        overflow: hidden;
+    }
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Adjust the alpha channel for desired opacity */
+        backdrop-filter: blur(0px); /* Adjust the blur radius */
+        z-index: 0;
     }
     .header {
-        display: block;
+        display: block    ;
         align-items: center;
         justify-content: center;
-        margin-bottom: 20px; 
+        margin-bottom: 0px; 
+        width:320px;
     }
 
     .container {
         text-align: center;
-        border: 3px solid #ccc;
-        border-radius: 20px;
-        padding: 30px;
-        position: relative;
+        border: 3px solid #ccc; /* Border properties */
+        border-radius: 20px; /* Rounded border */
+        padding: 30px; /* Padding inside the border */
+        position: relative; /* Necessary for absolute positioning of the image */
         font-size: 15px;
-        width:350px;
+        left :75vh;
+        top : 10vh;
+        width:300px;
+        height:60vh;
     }
 
     .payment-options {
@@ -56,24 +124,22 @@
     }
 
     .payment-options label.btn:hover {
-        background-color: #80120a;
+        background-color: #542399;
     }
 
-    .payment-options input[type="radio"]:checked + label.btn {
+    /* .payment-options input[type="radio"]:checked + label.btn {
         background-color: #0056b3;
-    }
-
+    } */
     #topRightImage {
         position: absolute;
-        top: 10px;
-        right: 10px;
-        width: 250px;
-        height: auto;
+        top: 10px; /* Adjust as needed */
+        right: 10px; /* Adjust as needed */
+        width: 250px; /* Adjust width as needed */
+        height: auto; /* Maintain aspect ratio */
     }
-
     .logo {
-        width: 70px;
-        margin-right: 10px;
+        width: 100px; /* Adjust size as needed */
+        margin-right: 10px; /* Adjust spacing between logo and heading */
     }
 
     /* Modal */
@@ -129,24 +195,29 @@
 </style>
 </head>
 <body>
-<img src="/static/icon.png" alt="Image" id="topRightImage">
+<div class="overlay"></div>
+<!-- <img src="/static/icon.png" alt="Image" id="topRightImage"> -->
 <div class="container">
     <div class="header">
         <img src="/static/Hsbc_icon.png" alt="HSBC Logo" class="logo">
-        <h1 class="heading">HSBC Payment Mode</h1>
+        <h1 class="heading" style="color:white">Payment Mode</h1>
     </div> 
     <form class="payment-options">
-        <input type="radio" id="creditDebit" name="paymentMethod" value="creditDebit">
-        <label class="btn" for="creditDebit">Pay through Credit/Debit Card</label><br>
-        
-        <input type="radio" id="upi" name="paymentMethod" value="upi">
-        <label class="btn" for="upi">Pay through UPI</label><br>
-        
+
         <input type="radio" id="facePay" name="paymentMethod" value="facePay">
         <label class="btn" for="facePay" onclick="openModal()">FacePay</label><br>
+
+        <input type="radio" id="creditDebit" name="paymentMethod" value="creditDebit">
+        <label class="btn" for="creditDebit">Pay through Credit/Debit</label><br>   
         
+        
+        <!-- <label class="btn" for="facePay" onclick="openModal()"><img src="/static/icon.png" alt="FacePay"></label><br>
+         -->
+        <input type="radio" id="upi" name="paymentMethod" value="upi">
+        <label class="btn" for="upi">UPI Payment</label><br>
+
         <input type="radio" id="others" name="paymentMethod" value="others">
-        <label class="btn" for="others">Others</label>
+        <label class="btn" for="others">Paypal</label>
     </form>
 </div>
 
@@ -154,7 +225,7 @@
 <div id="myModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
-        <p>How would you like to proceed with the payment?</p>
+        <p>How would you like to authenticate your payment?</p>
         <button onclick="fpinClicked()">FPIN</button>
         <button onclick="otpClicked()">OTP</button>       
     </div>

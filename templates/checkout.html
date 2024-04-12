@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout</title>
+  <style>
+    /* Add your styles here */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #ccc;
+      margin-bottom: 20px;
+    }
+
+    .navbar img {
+      max-width: 100px;
+    }
+
+    .checkout-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .shopping-cart-heading {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .cart-table {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    .cart-table th,
+    .cart-table td {
+      padding: 10px;
+      text-align: center;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .cart-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .checkout-btn {
+      background-color: #ff9900;
+      border: none;
+      border-radius: 4px;
+      color: #fff;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+
+    .payment-summary {
+      float: right;
+      width: 40%;
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: right;
+    }
+
+    .payment-summary h3 {
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="navbar">
+      <img src="amazon_logo.png" alt="Amazon Logo">
+    </div>
+
+    <h2 class="checkout-header">Checkout</h2>
+
+    <h3 class="shopping-cart-heading">Shopping Cart</h3>
+    <table class="cart-table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody id="cart-items">
+        <!-- Table rows for cart items will be dynamically added here -->
+      </tbody>
+    </table>
+
+    <div class="cart-buttons">
+      <button onclick="continueShopping()">Continue Shopping</button>
+      <button class="checkout-btn" onclick="proceedToCheckout()">Proceed to Payment</button>
+    </div>
+
+    <div class="payment-summary">
+      <h3>Payment Summary</h3>
+      <p>GST: $0</p>
+      <p>Shipping Charge: $0</p>
+      <p>Store Discount: $0</p>
+      <hr>
+      <p>Order Total: $0</p>
+    </div>
+  </div>
+
+  <script>
+    // Retrieve cart data from URL query parameter
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const cartData = urlParams.get('cart');
+    const cartItems = JSON.parse(decodeURIComponent(cartData));
+
+    // Function to display cart items in the table
+    function displayCartItems() {
+      const cartItemsContainer = document.getElementById('cart-items');
+      let totalAmount = 0;
+
+      cartItems.forEach(item => {
+        const subtotal = item.price * item.quantity;
+        totalAmount += subtotal;
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${item.name}<br><img src="${item.image}" alt="${item.name}" style="max-width: 80px;"></td>
+          <td>$${item.price}</td>
+          <td>
+            <button onclick="decreaseQuantity(${item.id})">-</button>
+            ${item.quantity}
+            <button onclick="increaseQuantity(${item.id})">+</button>
+          </td>
+          <td>$${subtotal}</td>
+        `;
+        cartItemsContainer.appendChild(row);
+      });
+
+      // Update order total in payment summary
+      const orderTotalElement = document.querySelector('.payment-summary p:last-child');
+      orderTotalElement.textContent = `Order Total: $${totalAmount}`;
+    }
+
+    // Function to continue shopping
+    function continueShopping() {
+      window.location.href = 'index.html'; // Redirect to home page
+    }
+
+    // Function to proceed to checkout
+    function proceedToCheckout() {
+      alert('Redirecting to checkout page...'); // Placeholder action
+      window.location.href = 'fpin_.html'; // Uncomment this line when you have a checkout page
+    }
+
+    // Function to decrease quantity
+    function decreaseQuantity(itemId) {
+      const item = cartItems.find(item => item.id === itemId);
+      if (item.quantity > 1) {
+        item.quantity--;
+        updateCart();
+      }
+    }
+
+    // Function to increase quantity
+    function increaseQuantity(itemId) {
+      const item = cartItems.find(item => item.id === itemId);
+      item.quantity++;
+      updateCart();
+    }
+
+    // Function to update cart and refresh table
+    function updateCart() {
+      // Clear existing table rows
+      const cartItemsContainer = document.getElementById('cart-items');
+      cartItemsContainer.innerHTML = '';
+
+      // Re-display cart items
+      displayCartItems();
+    }
+
+    // Display cart items when the page loads
+    window.onload = displayCartItems;
+  </script>
+</body>
+</html>

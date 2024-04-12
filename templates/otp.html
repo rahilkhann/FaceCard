@@ -107,18 +107,18 @@
     </div> -->
     <div class="header">
         <img src="/static/Hsbc_icon.png" alt="HSBC Logo" class="logo">
-        <img src="icon_1.png" alt="Facepay Logo" class="logo_1">
+        <img src="/static/icon.png" alt="Facepay Logo" class="logo_1">
         <!-- <h2 style="color: rgb(74, 39, 98);margin-top:50px;font-size: 2vw;">One-Time Password</h2>
         <p>The One Time Password for the current transaction is sent to your registered mobile number ending with xxxxxxx874 </p> -->
     </div>
     
     <form class="otp-form" id="otpForm">
         <h2 style="color: rgb(74, 39, 98);margin-top:50px;font-size: 2vw;">One-Time Password</h2>
-        <p>The One Time Password for the current transaction is sent to your registered mobile number ending with xxxxxxx874 </p>
+        <p>The One Time Password for the current transaction is sent to your registered mobile number </p>
         <input type="text" id="otp" name="otp" placeholder="Enter OTP" required><br><br>
         <button type="submit" id="submitBtn">Submit</button><br><br>
         <button type="button" id="resendBtn" disabled>Resend OTP</button><br><br>
-        <div id="timer">Time remaining: 2:00</div>
+        <div id="timer">Time remaining: 1:00</div>
         <div id="message"></div> <!-- Container for displaying messages -->
     </form>
 </div>
@@ -156,11 +156,8 @@ document.getElementById('otpForm').addEventListener('submit', function(event) {
             showMessage(data.message);
             // alert(data.message); // Display a message to the user
             if (data.message === 'OTP processed successfully') {
-            startTimer();
-            setTimeout(() => {
-                window.location.href = '/final'; // Redirect after 2 minutes
-            }, 1200); // 2 minutes in milliseconds
-        }
+                window.location.href = '/final';
+            }
         })
         .catch(error => {
             console.error('Error sending OTP:', error);
@@ -169,7 +166,7 @@ document.getElementById('otpForm').addEventListener('submit', function(event) {
     });
     // Timer countdown
     var timerElement = document.getElementById('timer');
-    var secondsRemaining = 120;
+    var secondsRemaining = 60;
     var countdownInterval;
 
     function countdown() {
@@ -199,7 +196,7 @@ document.getElementById('otpForm').addEventListener('submit', function(event) {
         secondsRemaining = 120;
         countdownInterval = setInterval(countdown, 1000);
         this.disabled = true;
-        timerElement.textContent = 'Time remaining: 2:00';
+        timerElement.textContent = 'Time remaining: 1:00';
         // Additional logic to resend OTP if needed
     });
 

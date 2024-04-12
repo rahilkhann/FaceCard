@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f3f3f3;
+      /* max-width: 400px; */
+    }
+    .search-bar {
+      background-color: #131921;
+      color: #fff;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .search-bar input[type="text"] {
+      padding: 8px;
+      border-radius: 4px;
+      border: none;
+      margin-right: 10px;
+      width: 300px;
+    }
+    .search-bar input[type="submit"] {
+      background-color: #ff9900;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .products {
+      display: flex;
+      flex-wrap: wrap;
+      margin-right: -20px; /* Offset the negative margin from individual product margin */
+    }
+
+    .container {
+      max-width: calc(95% - 430px);
+      /* max-width: calc(100% - 300px); */
+      /* margin: 0 10vh; */
+      /* margin-top:2vh; */
+      padding: 20px;
+      align-items: right;
+      top:0vh;
+      overflow-y: auto; /* Add scrollbar if content overflows vertically */
+      max-height: calc(100vh - 80px);
+      float: left;
+    }
+
+    .category {
+      margin-bottom: 40px;
+    }
+
+    .category h2 {
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+
+    .product-slider {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .product-slide {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .product {
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 20px;
+      width: 200px; /* Fixed width for product containers */
+      box-sizing: border-box;
+    }
+
+    .product img {
+      width: 100%;
+      height: auto;
+      max-width: 160px; /* Adjusted max-width for images */
+      max-height: 160px; /* Adjusted max-height for images */
+    }
+
+    .product h3 {
+      margin-top: 0;
+    }
+
+    .product p {
+      margin-bottom: 10px;
+    }
+
+    .add-to-cart-btn {
+      background-color: #ff9900;
+      border: none;
+      border-radius: 4px;
+      color: #fff;
+      padding: 8px 16px;
+      cursor: pointer;
+    }
+
+    .arrow-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(255, 255, 255, 0.5);
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 20px;
+      line-height: 40px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .left-arrow {
+      left: 0;
+    }
+
+    .right-arrow {
+      right: 0;
+    }
+
+    
+
+    .cart {
+      width: 370px; /* Adjust width as needed */
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      top:8vh;
+      right :20px;
+      margin-left: 155vh;
+      float: right;
+    }
+    .clearfix::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+
+    .cart h2 {
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-size: 1.5em;
+      color: #111;
+    }
+
+    .cart-item {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+
+    .cart-item img {
+      width: 40px;
+      height: 40px;
+      border-radius: 4px;
+      margin-right: 10px;
+    }
+
+    .cart-item p {
+      margin: 0;
+      color: #666;
+    }
+
+    .cart-total {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .checkout-btn {
+      background-color: #ff9900;
+      border: none;
+      border-radius: 4px;
+      color: #fff;
+      padding: 8px 16px;
+      cursor: pointer;
+      display: block;
+      width: 100%;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="search-bar">
+    <form action="#" method="get">
+      <input type="text" placeholder="Search for a product">
+      <input type="submit" value="Search">
+    </form>
+  </div> 
+  <div class="clearfix">  
+    <div class="container">
+      
+      <div class="category">
+        <h2>Fashion</h2>  
+        <div class="products">
+          <div class="product">
+            <img src="/static/fashion1.jpg" alt="Fashion 1">
+            <h3>Fashion Product 1</h3>
+            <p>Price: $50</p>
+            <button class="add-to-cart-btn" onclick="addToCart('Fashion Product 1', 50, '/static/fashion1.jpg')">Add to Cart</button>        
+          </div>
+          <div class="product">
+            <img src="/static/fashion2.jpg" alt="Fashion 2">
+            <h3>Fashion Product 2</h3>
+            <p>Price: $50</p>
+            <button class="add-to-cart-btn" onclick="addToCart('Fashion Product 2', 50,'/static/fashion2.jpg')">Add to Cart</button>
+          </div>
+          <div class="product">
+            <img src="/static/fashion3.jpg" alt="Fashion 3">
+            <h3>Fashion Product 3</h3>
+            <p>Price: $50</p>
+            <button class="add-to-cart-btn" onclick="addToCart('Fashion Product 3', 50,'/static/fashion3.jpg')">Add to Cart</button>
+          </div>
+          <div class="product">
+            <img src="/static/fashion4.jpg" alt="Fashion 4">
+            <h3>Fashion Product 4</h3>
+            <p>Price: $50</p>
+            <button class="add-to-cart-btn" onclick="addToCart('Fashion Product 4', 50,'/static/fashion4.jpg')">Add to Cart</button>
+          </div>
+          <div class="product">
+            <img src="/static/fashion5.jpg" alt="Fashion 5">
+            <h3>Fashion Product 5</h3>
+            <p>Price: $50</p>
+            <button class="add-to-cart-btn" onclick="addToCart('Fashion Product 5', 50,'/static/fashion5.jpg')">Add to Cart</button>
+          </div>
+          <div class="product">
+            <img src="/static/fashion6.jpg" alt="Fashion 4">
+            <h3>Fashion Product 6</h3>
+            <p>Price: $50</p>
+            <button class="add-to-cart-btn" onclick="addToCart('Fashion Product 6', 50,'/static/fashion6.jpg')">Add to Cart</button>
+          </div>
+          <div class="product">
+            <img src="/static/fashion7.jpg" alt="Fashion 5">
+            <h3>Fashion Product 7</h3>
+            <p>Price: $50</p>
+            <button class="add-to-cart-btn" onclick="addToCart('Fashion Product 7', 50,'/static/fashion7.jpg')">Add to Cart</button>
+          </div>
+          <div class="product">
+            <img src="/static/fashion8.jpg" alt="Fashion 4">
+            <h3>Fashion Product 8</h3>
+            <p>Price: $50</p>
+            <button class="add-to-cart-btn" onclick="addToCart('Fashion Product 8', 50,'/static/fashion8.jpg')">Add to Cart</button>
+          </div>
+          <div class="product">
+            <img src="/static/fashion9.jpg" alt="Fashion 5">
+            <h3>Fashion Product 9</h3>
+            <p>Price: $50</p>
+            <button class="add-to-cart-btn" onclick="addToCart('Fashion Product 9', 50,'/static/fashion9.jpg')">Add to Cart</button>
+          </div>
+          <div class="product">
+            <img src="/static/fashion10.jpg" alt="Fashion 4">
+            <h3>Fashion Product 10</h3>
+            <p>Price: $50</p>
+            <button class="add-to-cart-btn" onclick="addToCart('Fashion Product 10', 50,'/static/fashion10.jpg')">Add to Cart</button>
+          </div>
+          <div class="product">
+            <img src="/static/fashion2.jpg" alt="Fashion 5">
+            <h3>Fashion Product 11</h3>
+            <p>Price: $50</p>
+            <button class="add-to-cart-btn" onclick="addToCart('Fashion Product 5', 50,'/static/fashion2.jpg')">Add to Cart</button>
+          </div>
+          <div class="product">
+            <img src="/static/fashion4.jpg" alt="Fashion 4">
+            <h3>Fashion Product 12</h3>
+            <p>Price: $50</p>
+            <button class="add-to-cart-btn" onclick="addToCart('Fashion Product 4', 50,'/static/fashion4.jpg')">Add to Cart</button>
+          </div>
+          <div class="product">
+            <img src="/static/fashion5.jpg" alt="Fashion 5">
+            <h3>Fashion Product 13</h3>
+            <p>Price: $50</p>
+            <button class="add-to-cart-btn" onclick="addToCart('Fashion Product 5', 50,'/static/fashion5.jpg')">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="category">
+        <h2>Mobiles</h2>
+        <div class="products">
+          <div class="product">
+            <img src="/static/mobile1.jpg" alt="Mobile 1">
+            <h3>Mobile Brand 1</h3>
+            <p>Price: $500</p>
+            <button class="add-to-cart-btn" onclick="addToCart('Mobile Brand 1', 500,'/static/mobile1.jpg')">Add to Cart</button>
+          </div>
+          <div class="product">
+            <img src="/static/mobile2.jpg" alt="Mobile 2">
+            <h3>Mobile Brand 2</h3>
+            <p>Price: $500</p>
+            <button class="add-to-cart-btn" onclick="addToCart('Mobile Brand 2', 500,'/static/mobile2.jpg')">Add to Cart</button>
+          </div>
+          <div class="product">
+            <img src="/static/mobile3.jpg" alt="Mobile 3">
+            <h3>Mobile Brand 3</h3>
+            <p>Price: $500</p>
+            <button class="add-to-cart-btn" onclick="addToCart('Mobile Brand 3', 500,'/static/mobile3.jpg')">Add to Cart</button>
+          </div>
+          <div class="product">
+            <img src="/static/mobile4.jpg" alt="Mobile 4">
+            <h3>Mobile Brand 4</h3>
+            <p>Price: $500</p>
+            <button class="add-to-cart-btn" onclick="addToCart('Mobile Brand 4', 500,'/static/mobile4.jpg')">Add to Cart</button>
+          </div>
+          <div class="product">
+            <img src="/static/mobile5.jpg" alt="Mobile 5">
+            <h3>Mobile Brand 5</h3>
+            <p>Price: $500</p>
+            <button class="add-to-cart-btn" onclick="addToCart('Mobile Brand 5', 500,'/static/mobile5.jpg')">Add to Cart</button>
+          </div>
+          <div class="product">
+            <img src="/static/mobile6.jpg" alt="Mobile 1">
+            <h3>Mobile Brand 1</h3>
+            <p>Price: $500</p>
+            <button class="add-to-cart-btn" onclick="addToCart('Mobile Brand 1', 500,'/static/mobile6.jpg')">Add to Cart</button>
+          </div>
+          <div class="product">
+            <img src="/static/mobile7.jpg" alt="Mobile 2">
+            <h3>Mobile Brand 2</h3>
+            <p>Price: $500</p>
+            <button class="add-to-cart-btn" onclick="addToCart('Mobile Brand 2', 500,'/static/mobile7.jpg')">Add to Cart</button>
+          </div>
+          <div class="product">
+            <img src="/static/mobile8.jpg" alt="Mobile 1">
+            <h3>Mobile Brand 1</h3>
+            <p>Price: $500</p>
+            <button class="add-to-cart-btn" onclick="addToCart('Mobile Brand 1', 500,'/static/mobile8.jpg')">Add to Cart</button>
+          </div>
+          <div class="product">
+            <img src="/static/mobile9.jpg" alt="Mobile 2">
+            <h3>Mobile Brand 2</h3>
+            <p>Price: $500</p>
+            <button class="add-to-cart-btn" onclick="addToCart('Mobile Brand 2', 500,'/static/mobile9.jpg')">Add to Cart</button>
+          </div>
+          <div class="product">
+            <img src="/static/mobile10.jpg" alt="Mobile 1">
+            <h3>Mobile Brand 1</h3>
+            <p>Price: $500</p>
+            <button class="add-to-cart-btn" onclick="addToCart('Mobile Brand 1', 500,'/static/mobile10.jpg')">Add to Cart</button>
+          </div>
+          <div class="product">
+            <img src="/static/mobile11.jpg" alt="Mobile 2">
+            <h3>Mobile Brand 2</h3>
+            <p>Price: $500</p>
+            <button class="add-to-cart-btn" onclick="addToCart('Mobile Brand 2', 500,'/static/mobile11.jpg')">Add to Cart</button>
+          </div>
+          <div class="product">
+            <img src="/static/mobile12.jpg" alt="Mobile 1">
+            <h3>Mobile Brand 1</h3>
+            <p>Price: $500</p>
+            <button class="add-to-cart-btn" onclick="addToCart('Mobile Brand 12', 500,'/static/mobile12.jpg')">Add to Cart</button>
+          </div>
+          <div class="product">
+            <img src="/static/mobile12.jpg" alt="Mobile 2">
+            <h3>Mobile Brand 2</h3>
+            <p>Price: $500</p>
+            <button class="add-to-cart-btn" onclick="addToCart('Mobile Brand 2', 500,'/static/mobile2.jpg')">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+      
+      <button class="add-to-cart-btn" onclick="gotocart">Go to Cart</button>
+      
+    </div>
+    <div class="cart">
+      <h2>Shopping Cart</h2>
+      <div id="cart-items"></div>
+      <div class="cart-total" id="cart-total">Total: $0</div>
+      <button class="checkout-btn" onclick="checkout()">Checkout</button>
+    </div>
+  </div>
+
+  <script>
+    let cartItems = [];
+    let totalAmount = 0;
+
+    function addToCart(itemName, itemPrice, itemImage) {
+      const rating = Math.floor(Math.random() * 5) + 1;
+      cartItems.push({ name: itemName, price: itemPrice, image: itemImage });
+      totalAmount += itemPrice;
+
+      updateCart();
+    }
+
+    function updateCart() {
+      const cartItemsContainer = document.getElementById('cart-items');
+      cartItemsContainer.innerHTML = '';
+
+      // cartItems.forEach(item => {
+      //   const cartItemElement = document.createElement('div');
+      //   cartItemElement.classList.add('cart-item');
+      //   cartItemElement.textContent = `${item.name} - $${item.price}`;
+      //   cartItemsContainer.appendChild(cartItemElement);
+      cartItems.forEach(item => {
+        const cartItemElement = document.createElement('div');
+        cartItemElement.classList.add('cart-item');
+        cartItemElement.innerHTML = `
+          <img src="${item.image}" alt="${item.name}">
+          <div>
+            <p>${item.name} - $${item.price}</p>
+          </div>
+        `;
+        cartItemsContainer.appendChild(cartItemElement);
+      });
+
+      const cartTotalElement = document.getElementById('cart-total');
+
+      cartTotalElement.textContent = `Total: $${totalAmount}`;
+      
+    }
+    function checkout() {
+      // Serialize cartItems to pass it to the next page
+      const serializedCartItems = encodeURIComponent(JSON.stringify(cartItems));
+      // Redirect to the checkout page with serialized cart data
+      // window.location.href = `checkout__.html?cart=${serializedCartItems}`;
+      window.location.href = `/checkout?cart=${serializedCartItems}`;
+    }
+
+    function gotocart(){
+      const cartData = encodeURIComponent(JSON.stringify(cartItems));
+      window.location.href = `checkout.html?cart=${cartData}`;s
+    }
+  </script>
+</body>
+</html>

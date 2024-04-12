@@ -77,12 +77,19 @@ templates = Jinja2Templates(directory="templates")
 
 @app.get("/", response_class=HTMLResponse)
 async def get_payment_page(request: Request):
-    return templates.TemplateResponse("payment_page.html", {"request": request})
+    #return templates.TemplateResponse("payment_page.html", {"request": request})
+    return templates.TemplateResponse("shopping.html", {"request": request})
+
+
+@app.get("/checkout", response_class=HTMLResponse)
+async def get_checkout_page(request: Request,cart: str):
+    #return templates.TemplateResponse("payment_page.html", {"request": request})
+    print("inside checkout page")
+    return templates.TemplateResponse("checkout__.html", {"request": request})
+
 
 @app.get("/payment-options", response_class=HTMLResponse)
 async def get_payment_options_page(request: Request):
-
-
     print("I am insisde payment-options")
     print("Request :",request)
     return templates.TemplateResponse("payment_options.html", {"request": request})
@@ -93,7 +100,7 @@ async def get_payment_page(request: Request):
 
 @app.get("/final", response_class=HTMLResponse)
 async def get_payment_page(request: Request):
-    return templates.TemplateResponse("fi.html", {"request": request})
+    return templates.TemplateResponse("final.html", {"request": request})
 
 @app.get("/fpin_", response_class=HTMLResponse)
 async def get_payment_page(request: Request):
